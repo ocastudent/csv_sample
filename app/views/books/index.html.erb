@@ -1,0 +1,27 @@
+<p style="color: green"><%= notice %></p>
+
+<% content_for :title, "Books" %>
+
+<h1>Books</h1>
+
+<div id="books">
+  <% @books.each do |book| %>
+    <%= render book %>
+    <p>
+      <%= link_to "Show this book", book %>
+    </p>
+  <% end %>
+  <%= link_to 'ダウンロード', books_download_path(format: :csv) %> <!-- 追加 -->
+</div>
+
+<%= form_with(model: @book, url: books_upload_path, local: true) do |form| %>
+  <div class="fields">
+    <%= form.file_field :csv_file, id: :book_csv_file %>
+  </div>
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+
+
+
